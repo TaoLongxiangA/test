@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("hello,world!")
-	fmt.Println("hello,world!")
+	//url := []string{"/err?msg=", "123123"}
+	//fmt.Println(url)
+	//fmt.Println(reflect.TypeOf(url))
+	//join := strings.Join(url, "")
+	//fmt.Println(join)
+	//fmt.Println(reflect.TypeOf(join))
 }
