@@ -30,7 +30,7 @@ type User struct {
 
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", "user=postgres password=123456 dbname=chichat sslmode=disable")
+	Db, err = sql.Open("postgres", "user=postgres password=123456 dbname=chitchat")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -60,12 +60,12 @@ func (thread *Thread) NumReplies() (count int) {
 // Get the user who started this thread
 func (thread *Thread) User() (user User) {
 	user = User{}
-	Db.QueryRow("SELECT id, uuid, name, email, created_at FROM users WHERE id = $1", thread.UserId).
+	_ = Db.QueryRow("SELECT id, uuid, name, email, created_at FROM users WHERE id = $1", thread.UserId).
 		Scan(&user.Id, &user.Uuid, &user.Name, &user.Email, &user.CreatedAt)
 	return
 }
 
-func index(writer http.ResponseWriter, request *http.Request) {
+func index(writer http.ResponseWriter, _ *http.Request) {
 	thread := Thread{
 		Id:        1,
 		Uuid:      "99999999999999",
@@ -75,10 +75,10 @@ func index(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	t := template.Must(template.ParseFiles("t1.html"))
-	t.Execute(writer, &thread)
+	_ = t.Execute(writer, &thread)
 }
 
 func main() {
 	http.HandleFunc("/test", index)
-	http.ListenAndServe("127.0.0.1:9000", nil)
+	_ = http.ListenAndServe("127.0.0.1:9000", nil)
 }
