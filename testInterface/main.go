@@ -1,32 +1,12 @@
 package main
 
-import (
-	"fmt"
-	"log"
-)
+import "test/testInterface/testInterface1"
 
 func main() {
-	var a interface{}
-	test0(a)
-
-	//fmt.Println(f)
+	var dog *testInterface1.Dog
+	test(dog)
 }
 
-func test0(a interface{}) {
-	//return func(a interface{}) bool {
-	i := a.(int)
-	log.Println("convert success", i)
-	//}
-}
-
-func test1() {
-	//go func() {
-	a := func(i interface{}) string {
-		if i != nil {
-			return "111"
-		}
-		return "222"
-	}
-	//}()
-	fmt.Printf("%d ", a)
+func test(s testInterface1.Animal) {
+	s.Picture()
 }
